@@ -1,0 +1,56 @@
+export const frontmatter = {
+  title: "Hack The Box Web Challenge Flag Command Writeup",
+  slug: "hack-the-box-challenge-flag-command-writeup",
+  category: "HTB",
+  description:
+    "Complete Hack The Box Meow writeup for beginners. Learn how to perform Nmap enumeration, and Telnet misconfigurations",
+  date: "2026-03-25",
+};
+
+export const metadata = {
+  title: "Hack The Box Web Challenge Flag Command Writeup | loxcalhost",
+  description:
+    "Step-by-step Hack The Box Flag Command challenge writeup. Learn how to analyze web vulnerabilities, exploit command injection, and capture the flag with practical techniques.",
+};
+
+## Introduction
+
+This is an easy web challenge from Hack The Box. The goal is to analyze the application, identify any exposed functionality, and use it to retrieve the flag.
+
+## Recon
+
+Viewing the source code revels three interseting files:
+
+```
+<script src="/static/terminal/js/commands.js" type="module"></script>
+ <script src="/static/terminal/js/main.js" type="module"></script>
+ <script src="/static/terminal/js/game.js" type="module"></script>
+```
+
+`main.js` revels a API endpoint in `fetchOption` function
+
+```
+const fetchOptions = () => {
+    fetch('/api/options')
+        .then((data) => data.json())
+        .then((res) => {
+            availableOptions = res.allPossibleCommands;
+
+        })
+        .catch(() => {
+            availableOptions = undefined;
+        })
+}
+```
+
+Upon visiting `http://<ip_addr>:31388/api/options` it revels a secret `Blip...<SNIP>...shmack`
+
+> **NOTE:** Replace `<ip_addr>` with your challenge IP address
+
+## Flag Retrieval
+
+Visit `http://<ip_addr>:31388/` in browswer and enter `start` to start the game
+
+> **NOTE:** Replace `<ip_addr>` with your challenge IP address
+
+Enter the secret value and grab the flag `HTB...<SNIP>...??}`

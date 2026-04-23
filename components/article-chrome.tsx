@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { ArrowLeft, Calendar, Clock, Link as LinkIcon, Check } from "lucide-react";
 import type { BlogPost } from "@/lib/blog";
 
@@ -26,31 +26,12 @@ export function ArticleChrome({ posts, children }: Props) {
   const pathname = usePathname();
   const slug = pathname?.replace(/^\/blog\//, "").replace(/\/$/, "") ?? "";
 
-  const { post, prev, next } = useMemo(() => {
-    const idx = posts.findIndex((p) => p.slug === slug);
-    if (idx === -1) return { post: null, prev: null, next: null };
-    return {
-      post: posts[idx],
-      // `posts` is newest-first, so an older article sits later in the list.
-      prev: idx < posts.length - 1 ? posts[idx + 1] : null,
-      next: idx > 0 ? posts[idx - 1] : null,
-    };
-  }, [posts, slug]);
+  const post = useMemo(
+    () => posts.find((p) => p.slug === slug) ?? null,
+    [posts, slug],
+  );
 
   const [copied, setCopied] = useState(false);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    function onScroll() {
-      const doc = document.documentElement;
-      const scrolled = doc.scrollTop;
-      const total = doc.scrollHeight - doc.clientHeight;
-      setProgress(total > 0 ? Math.min(100, (scrolled / total) * 100) : 0);
-    }
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   async function copyLink() {
     try {
@@ -66,12 +47,6 @@ export function ArticleChrome({ posts, children }: Props) {
 
   return (
     <>
-      <div
-        className="fixed top-[57px] left-0 h-0.5 bg-foreground z-40 transition-[width] duration-75"
-        style={{ width: `${progress}%` }}
-        aria-hidden
-      />
-
       {post && (
         <header className="max-w-3xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 not-prose">
           <Link
@@ -125,46 +100,6 @@ export function ArticleChrome({ posts, children }: Props) {
       )}
 
       {children}
-
-      {post && (prev || next) && (
-        <nav
-          aria-label="Article navigation"
-          className="max-w-3xl mx-auto px-4 sm:px-6 pb-16 not-prose"
-        >
-          <div className="border-t border-border pt-8 grid gap-4 sm:grid-cols-2">
-            {prev ? (
-              <Link
-                href={`/blog/${prev.slug}`}
-                className="block p-4 border border-border hover:border-foreground/50 hover:bg-secondary/10 transition-colors"
-              >
-                <div className="text-xs text-muted-foreground mb-1">
-                  ← Previous (older)
-                </div>
-                <div className="text-sm font-semibold text-foreground">
-                  {prev.title}
-                </div>
-              </Link>
-            ) : (
-              <div />
-            )}
-            {next ? (
-              <Link
-                href={`/blog/${next.slug}`}
-                className="block p-4 border border-border hover:border-foreground/50 hover:bg-secondary/10 transition-colors sm:text-right"
-              >
-                <div className="text-xs text-muted-foreground mb-1">
-                  Next (newer) →
-                </div>
-                <div className="text-sm font-semibold text-foreground">
-                  {next.title}
-                </div>
-              </Link>
-            ) : (
-              <div />
-            )}
-          </div>
-        </nav>
-      )}
     </>
   );
 }

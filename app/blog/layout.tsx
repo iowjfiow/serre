@@ -23,8 +23,10 @@ export default function BlogLayout({
           prose-li:text-foreground prose-li:marker:text-muted-foreground
           prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-a:decoration-muted-foreground/60 hover:prose-a:decoration-foreground prose-a:break-words
           prose-strong:text-foreground
-          prose-code:text-foreground
-          prose-code:bg-secondary/60 dark:prose-code:bg-zinc-900 dark:prose-code:text-green-400
+          prose-code:bg-zinc-200
+          prose-code:text-black
+          dark:prose-code:bg-zinc-900
+          dark:prose-code:text-green-400
           prose-code:px-1.5
           prose-code:py-0.5
           prose-code:rounded
@@ -33,13 +35,19 @@ export default function BlogLayout({
           prose-code:break-words
           prose-code:before:content-none
           prose-code:after:content-none
-          prose-pre:bg-zinc-950
+          prose-pre:bg-black
+          prose-pre:text-white
+          dark:prose-pre:text-green-400
           prose-pre:border
           prose-pre:border-zinc-800
           prose-pre:rounded-md
           prose-pre:overflow-x-auto
           prose-pre:text-sm
           prose-pre:shadow-sm
+          [&_pre_code]:bg-transparent
+          [&_pre_code]:text-inherit
+          [&_pre_code]:p-0
+          [&_pre_code]:font-normal
           prose-blockquote:border-l-4
           prose-blockquote:border-foreground/30
           prose-blockquote:bg-secondary/40

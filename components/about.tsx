@@ -15,8 +15,8 @@ export function About() {
   ]
 
   return (
-    <section id="about" className="py-20 border-t border-border">
-      <div className="max-w-2xl mx-auto px-6">
+    <section id="about" className="py-16 sm:py-20 border-t border-border">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6">
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-8">About</h2>
         
         <div className="space-y-6 text-muted-foreground leading-relaxed mb-12">

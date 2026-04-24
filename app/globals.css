@@ -184,3 +184,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Shiki / rehype-pretty-code — single dark theme for both modes,
+   because our <pre> background is always black. */
+figure[data-rehype-pretty-code-figure] {
+  margin: 1.25rem 0;
+}
+figure[data-rehype-pretty-code-figure] pre {
+  padding: 0.9rem 1rem;
+}
+figure[data-rehype-pretty-code-figure] code {
+  display: grid;
+}

@@ -1,3 +1,5 @@
+import { articleMetadata } from "@/lib/seo";
+
 export const frontmatter = {
   title: "Hack The Box Fawn Machine Writeup",
   slug: "hack-the-box-fawn-machine-writeup",
@@ -7,12 +9,15 @@ export const frontmatter = {
   date: "2025-03-07",
 };
 
-export const metadata = {
-  title:
-    "HackTheBox Fawn Writeup – FTP Enumeration & Anonymous Login | loxcalhost",
+export const metadata = articleMetadata({
+  title: "HackTheBox Fawn Writeup – FTP Enumeration & Anonymous Login",
   description:
     "Step-by-step writeup of HackTheBox Fawn, a beginner Starting Point machine. Learn how to exploit misconfigured FTP using nmap enumeration and anonymous login to capture the flag.",
-};
+  slug: frontmatter.slug,
+  category: frontmatter.category,
+  date: frontmatter.date,
+  tags: [frontmatter.category],
+});
 
 ## Introduction
 

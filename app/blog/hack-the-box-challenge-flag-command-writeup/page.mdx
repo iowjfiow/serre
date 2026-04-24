@@ -1,3 +1,5 @@
+import { articleMetadata } from "@/lib/seo";
+
 export const frontmatter = {
   title: "Hack The Box Web Challenge Flag Command Writeup",
   slug: "hack-the-box-challenge-flag-command-writeup",
@@ -7,11 +9,15 @@ export const frontmatter = {
   date: "2026-03-25",
 };
 
-export const metadata = {
-  title: "Hack The Box Web Challenge Flag Command Writeup | loxcalhost",
+export const metadata = articleMetadata({
+  title: "HackTheBox Flag Command Web Challenge Writeup",
   description:
-    "Step-by-step Hack The Box Flag Command challenge writeup. Learn how to analyze web vulnerabilities, exploit command injection, and capture the flag with practical techniques.",
-};
+    "Step-by-step Hack The Box Flag Command challenge writeup. Learn how to analyze web vulnerabilities, exploit exposed endpoints, and capture the flag with practical techniques.",
+  slug: frontmatter.slug,
+  category: frontmatter.category,
+  date: frontmatter.date,
+  tags: [frontmatter.category],
+});
 
 ## Introduction
 
@@ -21,26 +27,25 @@ This is an easy web challenge from Hack The Box. The goal is to analyze the appl
 
 Viewing the source code revels three interseting files:
 
-```
+```html
 <script src="/static/terminal/js/commands.js" type="module"></script>
- <script src="/static/terminal/js/main.js" type="module"></script>
- <script src="/static/terminal/js/game.js" type="module"></script>
+<script src="/static/terminal/js/main.js" type="module"></script>
+<script src="/static/terminal/js/game.js" type="module"></script>
 ```
 
 `main.js` revels a API endpoint in `fetchOption` function
 
-```
+```js
 const fetchOptions = () => {
-    fetch('/api/options')
-        .then((data) => data.json())
-        .then((res) => {
-            availableOptions = res.allPossibleCommands;
-
-        })
-        .catch(() => {
-            availableOptions = undefined;
-        })
-}
+  fetch("/api/options")
+    .then((data) => data.json())
+    .then((res) => {
+      availableOptions = res.allPossibleCommands;
+    })
+    .catch(() => {
+      availableOptions = undefined;
+    });
+};
 ```
 
 Upon visiting `http://<ip_addr>:31388/api/options` it revels a secret `Blip...<SNIP>...shmack`

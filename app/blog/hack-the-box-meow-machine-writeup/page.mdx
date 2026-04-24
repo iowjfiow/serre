@@ -1,3 +1,5 @@
+import { articleMetadata } from "@/lib/seo";
+
 export const frontmatter = {
   title: "Hack The Box Meow Machine Writeup",
   slug: "hack-the-box-meow-machine-writeup",
@@ -7,10 +9,15 @@ export const frontmatter = {
   date: "2025-03-06",
 };
 
-export const metadata = {
-  title: "Hack The Box Meow Machine Writeup | loxcalhost",
-  description: "Short description for SEO.",
-};
+export const metadata = articleMetadata({
+  title: "HackTheBox Meow Writeup – Telnet Misconfiguration",
+  description:
+    "Step-by-step writeup of HackTheBox Meow, a beginner Starting Point machine. Learn how to exploit a misconfigured Telnet service with blank-password root login and capture the flag.",
+  slug: frontmatter.slug,
+  category: frontmatter.category,
+  date: frontmatter.date,
+  tags: [frontmatter.category],
+});
 
 ## Introduction
 

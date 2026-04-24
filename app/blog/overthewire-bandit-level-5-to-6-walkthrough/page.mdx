@@ -1,3 +1,5 @@
+import { articleMetadata } from "@/lib/seo";
+
 export const frontmatter = {
   title: "OverTheWire Bandit Level 5 to 6 Walkthrough",
   slug: "overthewire-bandit-level-5-to-6-walkthrough",
@@ -6,10 +8,15 @@ export const frontmatter = {
   date: "2025-01-15",
 };
 
-export const metadata = {
-  title: "Penetration Testing Methodology | Security Researcher",
-  description: "A comprehensive guide to penetration testing methodology.",
-};
+export const metadata = articleMetadata({
+  title: "OverTheWire Bandit Level 5 → 6 Walkthrough",
+  description:
+    "Solve OverTheWire Bandit level 5 to 6 by finding a human-readable, non-world-writable file of exactly 1033 bytes using the `find` command.",
+  slug: frontmatter.slug,
+  category: frontmatter.category,
+  date: frontmatter.date,
+  tags: [frontmatter.category],
+});
 
 # OverTheWire Bandit Level 5 → 6 Walkthrough
 

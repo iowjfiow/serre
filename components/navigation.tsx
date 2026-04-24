@@ -71,25 +71,36 @@ export function Navigation() {
         </div>
       </div>
 
-      {open && (
-        <div
-          id="mobile-nav"
-          className="md:hidden border-t border-border bg-background"
-        >
-          <div className="max-w-2xl mx-auto px-4 py-2 flex flex-col">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="py-3 text-sm text-muted-foreground hover:text-foreground transition-colors border-b border-border/60 last:border-b-0"
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
+      <div
+        id="mobile-nav"
+        className={`md:hidden overflow-hidden border-border bg-background transition-[max-height,opacity,border-top-width] duration-300 ease-out ${
+          open
+            ? "max-h-96 opacity-100 border-t"
+            : "max-h-0 opacity-0 border-t-0"
+        }`}
+        aria-hidden={!open}
+      >
+        <div className="max-w-2xl mx-auto px-4 py-2 flex flex-col">
+          {navItems.map((item, i) => (
+            <a
+              key={item.href}
+              href={item.href}
+              tabIndex={open ? 0 : -1}
+              onClick={() => setOpen(false)}
+              style={{
+                transitionDelay: open ? `${60 + i * 30}ms` : "0ms",
+              }}
+              className={`py-3 text-sm text-muted-foreground hover:text-foreground border-b border-border/60 last:border-b-0 transition-[color,opacity,transform] duration-200 ease-out ${
+                open
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 -translate-y-1"
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
-      )}
+      </div>
     </nav>
   );
 }

@@ -43,10 +43,13 @@ export default function BlogLayout({
           prose-pre:overflow-x-auto
           prose-pre:text-sm
           prose-pre:shadow-none
-          [&_pre_code]:bg-transparent
-          [&_pre_code]:text-inherit
-          [&_pre_code]:p-0
-          [&_pre_code]:font-normal
+          [&_pre_code]:!bg-transparent
+          [&_pre_code]:!text-inherit
+          [&_pre_code]:!p-0
+          [&_pre_code]:!font-normal
+          [&_pre_code]:!shadow-none
+          [&_pre_code::before]:!content-none
+          [&_pre_code::after]:!content-none
           prose-blockquote:border-l-4
           prose-blockquote:border-foreground/30
           prose-blockquote:bg-secondary/40

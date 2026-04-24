@@ -35,15 +35,14 @@ export default function BlogLayout({
           prose-code:break-words
           prose-code:before:content-none
           prose-code:after:content-none
-          prose-pre:bg-black
+          prose-pre:!bg-black
           prose-pre:text-white
           dark:prose-pre:text-[#05df6f]
-          prose-pre:border
-          prose-pre:border-zinc-800
+          prose-pre:border-0
           prose-pre:rounded-md
           prose-pre:overflow-x-auto
           prose-pre:text-sm
-          prose-pre:shadow-sm
+          prose-pre:shadow-none
           [&_pre_code]:bg-transparent
           [&_pre_code]:text-inherit
           [&_pre_code]:p-0

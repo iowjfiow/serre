@@ -25,7 +25,7 @@ export default function BlogLayout({
           prose-strong:text-foreground
           prose-code:bg-[#e3e3e3]
           prose-code:text-black
-          dark:prose-code:bg-[#303030]
+          dark:prose-code:bg-[#3d3d3d]
           dark:prose-code:text-[#05df6f]
           prose-code:px-1.5
           prose-code:py-0.5
